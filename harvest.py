@@ -14,6 +14,7 @@ class MelonType(object):
         self.color = color
         self.is_seedless = is_seedless
         self.is_bestseller = is_bestseller
+        self.name = name
         self.pairings = []
 
     def add_pairing(self, pairing):
@@ -52,7 +53,11 @@ def make_melon_types():
 def print_pairing_info(melon_types):
     """Prints information about each melon type's pairings."""
 
-    # Fill in the rest
+    for melon in melon_types:
+        print "\n{} pairs with".format(melon.name)
+        for pairing in melon.pairings:
+            print "-{}".format(pairing)
+
 
 def make_melon_type_lookup(melon_types):
     """Takes a list of MelonTypes and returns a dictionary of melon type by code."""
@@ -81,5 +86,5 @@ def get_sellability_report(melons):
 
 
 melons = make_melon_types()
-print melons
+print_pairing_info(melons)
 
