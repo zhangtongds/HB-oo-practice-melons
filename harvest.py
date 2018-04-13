@@ -62,7 +62,12 @@ def print_pairing_info(melon_types):
 def make_melon_type_lookup(melon_types):
     """Takes a list of MelonTypes and returns a dictionary of melon type by code."""
 
-    # Fill in the rest
+    reporting_code = {}
+
+    for melon in melon_types:
+        reporting_code[melon.name] = melon.code
+
+    return reporting_code
 
 ############
 # Part 2   #
@@ -86,5 +91,4 @@ def get_sellability_report(melons):
 
 
 melons = make_melon_types()
-print_pairing_info(melons)
-
+print make_melon_type_lookup(melons)
