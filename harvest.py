@@ -77,8 +77,8 @@ def make_melon_type_lookup(melon_types):
 
 class Melon(object):
     """A melon in a melon harvest."""
-    def __init__(self, code, shape_rating, color_rating, field, harvester):
-        self.code = code
+    def __init__(self, melon_type, shape_rating, color_rating, field, harvester):
+        self.melon_type = melon_type
         self.shape_rating = shape_rating
         self.color_rating = color_rating
         self.field = field
@@ -89,7 +89,14 @@ class Melon(object):
 
         return self.shape_rating > 5 and self.color_rating > 5 and self.field != 3
 
-
+def import_data(melon_types, file_name):
+    harvest_melon = []
+    with open(file_name) as f:
+        for line in f:
+            word = line.split()
+            melon = Melon(melon_types[word[5]], word[2], word[3], word[-1], word[-4])
+            harvest_melon.append(melon)
+    return harvest_melon
 def make_melons(melon_types):
     """Returns a list of Melon objects."""
 
@@ -103,15 +110,20 @@ def make_melons(melon_types):
 
     melon_3 = Melon(melon_types['yw'], 9, 8, 3, 'Sheila')
     harvest.append(melon_3)
+
+
     
     return harvest
 
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
-
-    # Fill in the rest 
-
-
+    for melon in melons:
+        if melon.is_sellable():
+            print "Harvested by {} from Field # {} CAN BE SOLD".format(melon.harvester, melon.field)
+        else:
+            print "Harvested by {} from Field # {} NOT SELLABLE".format(melon.harvester, melon.field)
+   
 melons = make_melon_types()
 melons_by_id = make_melon_type_lookup(melons)
-print make_melons(melons_by_id)
+harvest = import_data(melons_by_id, 'harvest_log.txt')
+get_sellability_report(harvest)
