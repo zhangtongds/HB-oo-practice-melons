@@ -6,6 +6,8 @@
 class MelonType(object):
     """A species of melon at a melon farm."""
 
+    # flavor = "yum"
+
     def __init__(self, code, first_harvest, color, is_seedless, is_bestseller, 
                  name):
         """Initialize a melon."""
@@ -65,7 +67,7 @@ def make_melon_type_lookup(melon_types):
     reporting_code = {}
 
     for melon in melon_types:
-        reporting_code[melon.name] = melon.code
+        reporting_code[melon.code] = melon
 
     return reporting_code
 
