@@ -82,6 +82,12 @@ class Melon(object):
         self.field = field
         self.harvester = harvester
 
+    def is_sellable(self):
+        """Returns if sellable or not."""
+
+        return self.shape_rating > 5 and self.color_rating > 5 and self.field != 3
+
+
 def make_melons(melon_types):
     """Returns a list of Melon objects."""
 
@@ -93,5 +99,5 @@ def get_sellability_report(melons):
     # Fill in the rest 
 
 
-melons = make_melon_types()
-print make_melon_type_lookup(melons)
+# melons = make_melon_types()
+# print make_melon_type_lookup(melons)
